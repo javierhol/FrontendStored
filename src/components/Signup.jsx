@@ -53,7 +53,7 @@ export const Signup = () => {
                 </div>
                 <div className="mb-1 mx-5 sm:mx-5">
                     <Field className="form-control block w-full px-3 py-4 text-base font-normal text-gray-700 bg-white bg-clip-padding border boder-solid rounded transition ease-in-out mt-5 focus:text-gray-700
-                focus:border-gray-300 focus:outline-none" name="password" placeholder="Contraseña"/>
+                focus:border-gray-300 focus:outline-none" name="password" placeholder="Contraseña" type="password"/>
                 </div>
                 <div className="error">
                     <ErrorMessage component="div" className='text-red-600 ml-5 mb-1 text-sm' name='password'/>  
