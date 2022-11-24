@@ -11,10 +11,19 @@ import { Link } from "react-router-dom"
 export const AuthUser = () => {
 
     const [typeInput, setTypeInput] = useState(true)
+    const [postUserAuth, setPostUserAuth] = useState(
+        {
+            postData: {
+                email:"",
+                password:"",
+            }
+        }
+    )
+ 
  
     return (
         <>
-            <div className="form_Login w-2/5 m-5 drop-shadow-2xl ">
+            <div className="form_Login w-72 mx-auto sm:w-96    my-2 drop-shadow-2xl ">
                 <div className="login bg-gray-100 w-full rounded-md">
                     <h1 className='text-black  block p-2  text-2xl text-center font-sans font-medium'>Iniciar sesión</h1>
 
@@ -38,7 +47,7 @@ export const AuthUser = () => {
                             })
                         }
                         onSubmit={(values) => {
-                            alert("Hola")
+                          alert(JSON.stringify(values))
                         }}
                     >
                         <Form>
@@ -73,8 +82,10 @@ export const AuthUser = () => {
 
                                 <div className=" w-full">
                                     <Field type={typeInput == true?"password":"text"} name="password" placeholder="Contraseña"
+                                   
+                                   
                                     className="w-full block
-                                    outline-none"
+                                    outline-none bg-white" 
                                     
                                     />
 
@@ -136,7 +147,7 @@ export const AuthUser = () => {
                                     <p className='text-[#0099FF] mb-3 ml-3'>Crear cuenta</p>
                                 </Link>
                             </div>
-                            <div className="countCuenda">
+                            <div className="countCuenda cursor-pointer">
                                 <div className="authGoogle bg-slate-200
                                 p-2 m-2 flex items-center justify-center rounded">
                                     <div className="count-g">
