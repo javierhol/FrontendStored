@@ -3,9 +3,13 @@ import '../index.css';
 import { Formik, Field, Form, ErrorMessage } from "formik";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEnvelope, faKey, faCircleQuestion,faEye,faPhone, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
+import { GoogleLogin } from '@react-oauth/google';
+import jwt_decode from "jwt-decode";
 import { BiMusic } from "react-icons/bi";
+  import { ToastContainer, toast } from 'react-toastify';
+  import 'react-toastify/dist/ReactToastify.css';
+
 import * as Yup from "yup";
-import google from "../assets/img/google.png"
 import 'animate.css';
 import { Link } from "react-router-dom"
 export const AuthUser = () => {
@@ -19,11 +23,15 @@ export const AuthUser = () => {
             }
         }
     )
- 
+
+  const notify = () => toast("Wow so easy!");
  
     return (
+        
         <>
-            <div className="form_Login w-72 mx-auto sm:w-96    my-2 drop-shadow-2xl ">
+        
+ 
+            <div className="form_Login w-72 mx-auto sm:w-96    my-9 drop-shadow-2xl ">
                 <div className="login bg-gray-100 w-full rounded-md">
                     <h1 className='text-black  block p-2  text-2xl text-center font-sans font-medium'>Iniciar sesión</h1>
 
@@ -125,7 +133,7 @@ export const AuthUser = () => {
                             <div className="button w-full">
                                 <button type='submit'
                                 className='bg-[#0099FF] text-white rounded-full
-                                p-1 w-5/6 block mx-auto my-3 hover:opacity-[0.85] transition'
+                                p-1 py-1.5 w-5/6 block mx-auto my-3 hover:opacity-[0.85] transition'
                                 >Iniciar sesión</button>
                             </div>
 
@@ -147,16 +155,35 @@ export const AuthUser = () => {
                                     <p className='text-[#0099FF] mb-3 ml-3'>Crear cuenta</p>
                                 </Link>
                             </div>
-                            <div className="countCuenda cursor-pointer">
-                                <div className="authGoogle bg-slate-200
+                            <div className="countCuenda cursor-pointer"
+                            
+                            >
+                                <div className="authGoogle 
                                 p-2 m-2 flex items-center justify-center rounded">
-                                    <div className="count-g">
-                                    <img src={google}
-                                    className="w-9"/>
-                                    </div>
-                                    <div className="p ml-1">
-                                    Iniciar sesión con Google
-                                    </div>
+                                          
+   <GoogleLogin
+  onSuccess={credentialResponse => {
+    console.log(credentialResponse);
+    let decode = jwt_decode(credentialResponse.credential)
+    console.log(decode);
+    <div>
+        <button onClick={notify}>Notify!</button>
+        <ToastContainer />
+      </div>
+  }}
+  onError={() => {
+    <div>
+        <button onClick={notify}>Notify!</button>
+        <ToastContainer />
+      </div>
+  }}
+  useOneTap
+ locale
+ type="standard"
+ shape='pill'
+ theme='filled_black'
+ logo_alignment= "left"
+/>
                                 </div>
                             </div>
                             <div className="m-2 p-1"></div>
