@@ -4,7 +4,7 @@ import './index.css';
 import App from './app/App';
 import {BrowserRouter} from "react-router-dom"
 import { GoogleOAuthProvider } from '@react-oauth/google';
-
+ import 'react-toastify/dist/ReactToastify.css';
 const root = ReactDOM.createRoot(
   document.getElementById('sript-data') as HTMLElement
 );
