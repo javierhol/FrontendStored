@@ -16,9 +16,16 @@ import * as Yup from "yup";
 import "animate.css";
 import { Link } from "react-router-dom";
 import { usePostAuth } from "../hooks/context/UserContextData"
+import "../assets/css/spiner.css"
+import {  Navigate } from "react-router-dom";
 export const AuthUser = () => {
+    const token = localStorage.getItem( 'secure_token' )
     const [typeInput, setTypeInput] = useState( true );
-    const { setGetUserPostAut, createPostUser } = usePostAuth()
+    const [spiner, setSpiner] = useState( true );
+    const { getPostLogin } = usePostAuth()
+    if (token) {
+        return <Navigate to="/dasboard" />
+    }
     return (
         <>
             <ToastContainer />
@@ -49,9 +56,38 @@ export const AuthUser = () => {
                             password: Yup.string()
                                 .required( "El campo no puede estar vacio" )
                                 .min( 6, "Debe tener mas de 6 caracteres" ),
+                            
                         } )}
+                        
                         onSubmit={async ( values ) => {
-                            await createPostUser( values )
+                            let response = await getPostLogin( values );
+                            if ( response.status === 200 ) {
+                                toast.success( "Cargando...", {
+                                    position: toast.POSITION.TOP_RIGHT,
+                                    theme: "dark",
+                                } )
+                                let getData = response.data
+                                localStorage.setItem( "secure_token", getData.token )
+                                localStorage.setItem( "auth_cuenta", getData.auth )
+                                localStorage.setItem( "response_auth", getData.message )
+                                localStorage.setItem( "perfil_rol", getData.rol )
+                                 setSpiner( !spiner );
+                               window.location.href = "/dasboard";
+                            }
+                            if ( response.response.status === 400 ) {
+                                toast.error( "Este usuario no existe", {
+                                    position: toast.POSITION.TOP_RIGHT,
+                                    theme: "dark",
+                                } )
+                                await setSpiner( !spiner )
+                            } else if ( response.response.status === 401 ) {
+                                toast.warning( "La contraseña es incorrecta", {
+                                    position: toast.POSITION.TOP_RIGHT,
+                                    theme: "dark",
+                                } )
+                                await setSpiner( !spiner )
+                            }
+
                         }}
                     >
                         <Form>
@@ -79,6 +115,9 @@ export const AuthUser = () => {
                                     className="mx-2 block text-red-600
                                 animate__animated animate__fadeInUp "
                                     name="email"
+                                    // validate={validateEmail}
+                                    
+                                    
                                 />
                             </div>
 
@@ -144,20 +183,26 @@ export const AuthUser = () => {
                                     </p>
                                 </Link>
                                 <Link
-                                    to="/recoveryPassword"
+                                    to="/recovery+password/identify"
                                     className="text-[#0099FF] hover:underline"
                                 >
                                     ¿Olvidaste tu contraseña?
                                 </Link>
                             </div>
 
-                            <div className="button w-full">
+                            <div className="button w-full relative">
                                 <button
                                     type="submit"
-                                    className="bg-[#0099FF] text-white rounded-full
-                                p-1 py-1.5 w-5/6 block mx-auto my-3 hover:opacity-[0.85] transition"
+                                    className="bg-[#0099FF] text-white rounded-full relative
+                                p-1 py-1.5 w-5/6 mx-auto my-3 hover:opacity-[0.85] transition
+                                h-9 flex justify-center"
                                 >
-                                    Iniciar sesión
+                                    {spiner === true ? <span onClick={() => setSpiner( !spiner )}>Iniciar sesión</span> :
+                                        <div className="centh">
+                                            <div className="lds-ellipsis"><div></div><div></div><div></div><div></div></div>
+                                        </div>
+
+                                    }
                                 </button>
                             </div>
 
