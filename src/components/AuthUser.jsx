@@ -166,16 +166,10 @@ export const AuthUser = () => {
     console.log(credentialResponse);
     let decode = jwt_decode(credentialResponse.credential)
     console.log(decode);
-    <div>
-        <button onClick={notify}>Notify!</button>
-        <ToastContainer />
-      </div>
+    notify();
   }}
   onError={() => {
-    <div>
-        <button onClick={notify}>Notify!</button>
-        <ToastContainer />
-      </div>
+   notify();
   }}
   useOneTap
  locale
