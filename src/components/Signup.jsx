@@ -1,7 +1,9 @@
 import React, { useState } from 'react'
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEnvelope, faLock, faCircleQuestion, faEye, faPhone, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
+import { GoogleLogin } from "@react-oauth/google";
+import jwt_decode from "jwt-decode";
+import { faEnvelope, faLock, faCircleQuestion,faEye,faPhone, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import { faGoogle } from "@fortawesome/free-solid-svg-icons";
 import google from "../assets/img/google.png"
 import * as Yup from "yup";
@@ -10,51 +12,77 @@ import { Link } from "react-router-dom"
 
 export const Signup = () => {
 
-    const [typeInput, setTypeInput] = useState( true )
+    const [typeInput, setTypeInput] = useState(true)
+    const [postUserRegister, setPostUserRegister] = useState(
+        {
+            postData: {
+                email:"",
+                password:"",
+            }
+        }
+    )
+    const handleInputChange = (e)=>{
+        console.log(e.target.name);
+        console.log(e.target.value);
+        setPostUserRegister({
+            ...postUserRegister,
+            [e.target.name] : e.target.value
+        })
+    }
+    const enviarDatos = (e)=>{
+        e.preventDefault()
+       
+    }
 
-    return (
-
+    return(
         <>
-
-
-            <div className="form-signup w-4/5 sm:w-96 mx-auto sm:mx-auto mt-5 bg-gray-100">
-                <div className="container-signup  border shadow-2xl pb-1 rounded-lg ">
-                    <h1 class="text-xl font-semibold mt-2 mb-5 pt-5 text-center ">Registrarme</h1>
-                    <div className="description">
-                        <p class="mx-10 text-center sm:mx-auto">Crea una cuenta para mejorar la experiencia y </p>
-                        <p class="text-center mb-5">calidad de tu negocio</p>
-                    </div>
-                    <div className="countCuenda cursor-pointer">
-                        <div className="authGoogle bg-slate-200
+        
+        <div className="form-signup w-4/5 sm:w-96 mx-auto sm:mx-auto mt-5 bg-gray-100">
+            <div className="container-signup  border shadow-2xl pb-1 rounded-lg ">
+                <h1 class="text-xl font-semibold mt-2 mb-5 pt-5 text-center ">Registrarme</h1>
+                <div className="description">
+                    <p class="mx-10 text-center sm:mx-auto">Crea una cuenta para mejorar la experiencia y </p>
+                    <p class="text-center mb-5">calidad de tu negocio</p>
+                </div>
+                <div className="countCuenda cursor-pointer">
+                                <div className="authGoogle bg-slate-200
                                 p-2 m-2 flex items-center justify-center rounded">
-                            <div className="count-g">
-                                <img src={google}
-                                    className="w-9" />
+                                    <div className="p ml-1">
+                                    <GoogleLogin
+                                        onSuccess={( credentialResponse ) => {
+                                            console.log( credentialResponse );
+                                            let decode = jwt_decode( credentialResponse.credential );
+                                        }}
+                                        onError={() => { }}
+                                        useOneTap
+                                        locale
+                                        type="standard"
+                                        shape="pill"
+                                        theme="filled_black"
+                                        logo_alignment="left"
+                                    />
+                                    </div>
+                                </div>  
                             </div>
-                            <div className="p ml-1">
-                                Continuar con Google
-                            </div>
-                        </div>
-                    </div>
-                    <div className="flex items-center mx-5 my-5 before:flex-1 before:border-t before:border-gray-300 before:mt-0.5 after:flex-1 after:border-t after:border-gray-300 after:mt-0.5 sm:mx-5">
-                        <p className="text-center mx-4 mb-0">O</p>
-                    </div>
-                    <Formik
-                        initialValues={{ email: "", password: "", toggle: false, checked: [], }}
+                <div className="flex items-center mx-5 my-5 before:flex-1 before:border-t before:border-gray-300 before:mt-0.5 after:flex-1 after:border-t after:border-gray-300 after:mt-0.5 sm:mx-5">
+                <p className="text-center mx-4 mb-0">O</p>
+            </div>
+            <Formik
+                initialValues={{ email: "", password: "",toggle: false,checked: [], }}
+         
+                validationSchema={
+                Yup.object({
+                    email: Yup.string().email("El email no es valido").required("El campo no puede estar vacio"),
+                    password: Yup.string().required("La contraseña no es valida")
+                })
+            }
+                onSubmit={(values)=>{
+                alert("Hola")
+            }}
+            >
 
-                        validationSchema={
-                            Yup.object( {
-                                email: Yup.string().email( "El email no es valido" ).required( "El campo no puede estar vacio" ),
-                                password: Yup.string().required( "La contraseña no es valida" )
-                            } )
-                        }
-                        onSubmit={( values ) => {
-                            alert( "Hola" )
-                        }}
-                    >
-
-                        <Form>
-                            <div className="Fiel-email bg-white  flex items-center mx-2 my-1
+            <Form onSubmit={enviarDatos}>
+            <div className="Fiel-email bg-white  flex items-center mx-2 my-1
                            border-solid border-1 border-slate-300 rounded
                              ">
                                 <div className=" icons py-2 px-2 text-gray-400">
@@ -66,7 +94,7 @@ export const Signup = () => {
                                     <Field type="email" name="email"
                                         placeholder="Correo electronico"
                                         className="w-full block
-                                       outline-none " />
+                                       outline-none " onChange={handleInputChange} />
                                 </div>
                             </div>
                             <div className="error">
@@ -83,12 +111,12 @@ export const Signup = () => {
                                 </div>
 
                                 <div className=" w-full">
-                                    <Field type={typeInput == true ? "password" : "text"} name="password" placeholder="Contraseña"
-
-
-                                        className="w-full block
-                                    outline-none bg-white"
-
+                                    <Field type={typeInput === true?"password":"text"} onChange={handleInputChange} name="password" placeholder="Contraseña"
+                                   
+                                   
+                                    className="w-full block
+                                    outline-none bg-white" 
+                                    
                                     />
 
                                 </div>
@@ -96,14 +124,14 @@ export const Signup = () => {
                                  py-2 px-2 text-gray-400
                                  cursor-pointer
                                 "
-                                    name="eye"
-                                    onClick={() => {
-                                        setTypeInput( !typeInput )
-                                    }}>
-                                    {typeInput == true ? <FontAwesomeIcon icon={faEyeSlash}
-                                        className="animate__animated animate__fadeInRight" /> : <FontAwesomeIcon icon={faEye}
-                                            className="animate__animated animate__fadeInRight" />}
-
+                                name="eye"
+                                onClick={()=>{
+                                    setTypeInput(!typeInput)
+                                }}>
+                                    {typeInput === true ?<FontAwesomeIcon icon={faEyeSlash}
+                                    className="animate__animated animate__fadeInRight"/>:<FontAwesomeIcon icon={faEye}
+                                    className="animate__animated animate__fadeInRight"/>}
+                                    
                                 </div>
                             </div>
 
@@ -133,13 +161,13 @@ export const Signup = () => {
 
                                 </Link>
                             </div>
-                            <p className="text-sm font-semibold  mx-5 sm:ml-5 text-center my-5">¿Ya tienes una cuenta?
-                                <Link to="/auth">
-                                    <span href="#!" className="text-[#2771E0] hover:text-blue-700 transition duration-200 ease-in-out ml-1 sm:ml-1">Iniciar sesión</span>
-                                </Link>
-                            </p>
-                            <div className="text-center mt-5">
-                                <button type="button" className="bg-[#009AFA] inline-block px-6 py-2.5 w-40 rounded-full text-white  text-sm  rounded shadow-md hover:bg-[#009AFA] hover:shadow-lg focus:shadow-lg
+                    <p className="text-sm font-semibold  mx-5 sm:ml-5 text-center my-5">¿Ya tienes una cuenta?
+                    <Link to="/auth">
+                        <span href="#!" className="text-[#2771E0] hover:text-blue-700 transition duration-200 ease-in-out ml-1 sm:ml-1">Iniciar sesión</span>
+                    </Link>
+                    </p>
+                    <div className="text-center mt-5">
+                        <button type="submit" className="bg-[#009AFA] inline-block px-6 py-2.5 w-40 rounded-full text-white  text-sm  rounded shadow-md hover:bg-[#009AFA] hover:shadow-lg focus:shadow-lg
                         focus:outline-none focus:ring-0 active:shadow-lg transition duration-150 ease-in-out w-full mb-3">
                                     Crear cuenta
                                 </button>
