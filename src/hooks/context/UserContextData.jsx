@@ -1,6 +1,6 @@
 
 import React, { createContext, useState, useContext } from "react";
-import { PostDataUser,postRecoveryEmail,recoverycode,newPassword  } from "../../apis/ApiData"
+import { PostDataUser,postRecoveryEmail,recoverycode,newPassword,PostDataAdmin  } from "../../apis/ApiData"
 export const contextUserAdmin = createContext()
 
 export const usePostAuth = () => {
@@ -44,10 +44,19 @@ export const UserContextData = ( { children } ) => {
       return error
     }
   }
+  const getPostRegister = async (postDataAdmin) => {
+    try {
+        const response = await PostDataAdmin(postDataAdmin);
+        return response;
+    } catch (error) {
+        return error;
+    }
+}
 
   return <contextUserAdmin.Provider value={{
 
     getUserPost,
+    getPostRegister,
     setGetUserPostAut,
     getPostLogin,
     recoveryPasssword,

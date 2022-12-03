@@ -3,35 +3,22 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { GoogleLogin } from "@react-oauth/google";
 import jwt_decode from "jwt-decode";
-import { faEnvelope, faLock, faCircleQuestion,faEye,faPhone, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
-import { faGoogle } from "@fortawesome/free-solid-svg-icons";
-import google from "../assets/img/google.png"
-import * as Yup from "yup";
+import { faEnvelope, faLock, faCircleQuestion,faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
+import {usePostAuth} from "../hooks/context/UserContextData";
+import { ToastContainer, toast } from "react-toastify";
+import * as Yup from "yup"
 import 'animate.css';
-import { Link } from "react-router-dom"
+import { Link , Navigate} from "react-router-dom"
 
 export const Signup = () => {
 
+
+    const token = localStorage.getItem('secure_token')
     const [typeInput, setTypeInput] = useState(true)
-    const [postUserRegister, setPostUserRegister] = useState(
-        {
-            postData: {
-                email:"",
-                password:"",
-            }
-        }
-    )
-    const handleInputChange = (e)=>{
-        console.log(e.target.name);
-        console.log(e.target.value);
-        setPostUserRegister({
-            ...postUserRegister,
-            [e.target.name] : e.target.value
-        })
-    }
-    const enviarDatos = (e)=>{
-        e.preventDefault()
-       
+    const [spiner, setSpiner] = useState(true)
+    const { getPostRegister } = usePostAuth()
+    if (token) {
+        return <Navigate to="/login" />
     }
 
     return(
@@ -45,7 +32,7 @@ export const Signup = () => {
                     <p class="text-center mb-5">calidad de tu negocio</p>
                 </div>
                 <div className="countCuenda cursor-pointer">
-                                <div className="authGoogle bg-slate-200
+                                <div className="authGoogle 
                                 p-2 m-2 flex items-center justify-center rounded">
                                     <div className="p ml-1">
                                     <GoogleLogin
@@ -56,7 +43,7 @@ export const Signup = () => {
                                         onError={() => { }}
                                         useOneTap
                                         locale
-                                        type="standard"
+                                        type="classic"
                                         shape="pill"
                                         theme="filled_black"
                                         logo_alignment="left"
@@ -76,12 +63,35 @@ export const Signup = () => {
                     password: Yup.string().required("La contraseña no es valida")
                 })
             }
-                onSubmit={(values)=>{
-                alert("Hola")
-            }}
+                onSubmit={ async (values)=>{
+                   let response = await getPostRegister(values)
+
+                     if (response.status === 200) {
+                        toast.success( "Cargando...", {
+                            position: toast.POSITION.TOP_RIGHT,
+                            theme: "dark",
+                        } )
+                        let getData = response.data
+                        localStorage.setItem( "secure_token", getData.token )
+                        localStorage.setItem( "auth_cuenta", getData.auth )
+                        localStorage.setItem( "response_auth", getData.message )
+                        localStorage.setItem( "perfil_rol", getData.rol )
+                         setSpiner( !spiner );
+                       window.location.href = "/login";
+                    }
+                    if (response.status === 400) {
+
+                        toast.error( response.data.message, {
+                            position: toast.POSITION.TOP_RIGHT,
+                            theme: "dark",
+                        } )
+
+                    }
+                }
+            }
             >
 
-            <Form onSubmit={enviarDatos}>
+            <Form>
             <div className="Fiel-email bg-white  flex items-center mx-2 my-1
                            border-solid border-1 border-slate-300 rounded
                              ">
@@ -94,7 +104,7 @@ export const Signup = () => {
                                     <Field type="email" name="email"
                                         placeholder="Correo electronico"
                                         className="w-full block
-                                       outline-none " onChange={handleInputChange} />
+                                       outline-none "  />
                                 </div>
                             </div>
                             <div className="error">
@@ -111,7 +121,7 @@ export const Signup = () => {
                                 </div>
 
                                 <div className=" w-full">
-                                    <Field type={typeInput === true?"password":"text"} onChange={handleInputChange} name="password" placeholder="Contraseña"
+                                    <Field type={typeInput === true?"password":"text"}  name="password" placeholder="Contraseña"
                                    
                                    
                                     className="w-full block
