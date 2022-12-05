@@ -55,13 +55,13 @@ export const AuthUser = () => {
                                 .required( "El campo no puede estar vacio" ),
                             password: Yup.string()
                                 .required( "El campo no puede estar vacio" )
-                                .min( 6, "Debe tener mas de 6 caracteres" ),
+                             
                             
                         } )}
                         
                         onSubmit={async ( values ) => {
                             let response = await getPostLogin( values );
-                          
+                            console.log( response );
                             if ( response.status === 200 ) {
                                 toast.success( "Cargando...", {
                                     position: toast.POSITION.TOP_RIGHT,

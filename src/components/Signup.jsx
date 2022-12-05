@@ -12,24 +12,21 @@ import { Link , Navigate} from "react-router-dom"
 
 export const Signup = () => {
 
-
-    const token = localStorage.getItem('secure_token')
     const [typeInput, setTypeInput] = useState(true)
     const [spiner, setSpiner] = useState(true)
     const { getPostRegister } = usePostAuth()
-    if (token) {
-        return <Navigate to="/login" />
-    }
+    console.log(getPostRegister);
+    
 
     return(
         <>
-        
+         <ToastContainer />
         <div className="form-signup w-4/5 sm:w-96 mx-auto sm:mx-auto mt-5 bg-gray-100">
             <div className="container-signup  border shadow-2xl pb-1 rounded-lg ">
-                <h1 class="text-xl font-semibold mt-2 mb-5 pt-5 text-center ">Registrarme</h1>
+                <h1 className="text-xl font-semibold mt-2 mb-5 pt-5 text-center ">Registrarme</h1>
                 <div className="description">
-                    <p class="mx-10 text-center sm:mx-auto">Crea una cuenta para mejorar la experiencia y </p>
-                    <p class="text-center mb-5">calidad de tu negocio</p>
+                    <p className="mx-10 text-center sm:mx-auto">Crea una cuenta para mejorar la experiencia y </p>
+                    <p className="text-center mb-5">calidad de tu negocio</p>
                 </div>
                 <div className="countCuenda cursor-pointer">
                                 <div className="authGoogle 
@@ -55,38 +52,51 @@ export const Signup = () => {
                 <p className="text-center mx-4 mb-0">O</p>
             </div>
             <Formik
-                initialValues={{ email: "", password: "",toggle: false,checked: [], }}
+                initialValues={{ email: "", password: ""}}
          
                 validationSchema={
                 Yup.object({
-                    email: Yup.string().email("El email no es valido").required("El campo no puede estar vacio"),
-                    password: Yup.string().required("La contraseña no es valida")
+                    email: Yup.string()
+                    .email( "El email no es valido" )
+                    .required( "El campo no puede estar vacio" ),
+                password: Yup.string()
+                    .required( "El campo no puede estar vacio" )
+                    .min( 6, "Debe tener mas de 6 caracteres" ),
                 })
             }
                 onSubmit={ async (values)=>{
                    let response = await getPostRegister(values)
+                   console.log(response);
 
                      if (response.status === 200) {
-                        toast.success( "Cargando...", {
+                        toast.success( "Usuario creado exitosamente!", {
                             position: toast.POSITION.TOP_RIGHT,
                             theme: "dark",
                         } )
-                        let getData = response.data
-                        localStorage.setItem( "secure_token", getData.token )
-                        localStorage.setItem( "auth_cuenta", getData.auth )
-                        localStorage.setItem( "response_auth", getData.message )
-                        localStorage.setItem( "perfil_rol", getData.rol )
-                         setSpiner( !spiner );
-                       window.location.href = "/login";
                     }
-                    if (response.status === 400) {
-
-                        toast.error( response.data.message, {
+                    if(response.response.status === 400){
+                        toast.warning( "El correo ya existe!", {
                             position: toast.POSITION.TOP_RIGHT,
                             theme: "dark",
-                        } )
+                        
+                        } ) 
+                    };
 
+                    if(response.response.status === 401){
+                        toast.warning( "Hubo un problema al registrar sus datos, intente nuevamente", {
+                            position: toast.POSITION.TOP_RIGHT,
+                            theme: "dark",
+                        
+                        } ) 
                     }
+                    if(response.response.status === 500){
+                        toast.error( "Ocurrio un error inesperado, intente nuevamente", {
+                            position: toast.POSITION.TOP_RIGHT,
+                            theme: "dark",
+                        
+                        } ) 
+                    }
+                  
                 }
             }
             >

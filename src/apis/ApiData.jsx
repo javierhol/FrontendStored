@@ -9,3 +9,9 @@ export const newPassword = async (data) => await axios.post(`${urlServer}/newPas
 // Data Admin Register
 
 export const PostDataAdmin = async (postDataAdmin) => await axios.post(`${urlServer}/register`, { postDataAdmin})
+export const tokenData = async (tokenData,token) => await axios.post(`${urlServer}/register`, {tokenData},{
+    headers: {
+        "acc-token-data":token
+    }
+})
+
