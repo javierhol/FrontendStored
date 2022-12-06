@@ -4,6 +4,7 @@ export const PostDataUser = async (postDataUser) => await axios.post(`${urlServe
 export const postRecoveryEmail = async (email) => await axios.post(`${urlServer}/recovery`, { email})
 export const recoverycode = async (data) => await axios.post(`${urlServer}/recoverycode`, { data})
 export const newPassword = async (data) => await axios.post(`${urlServer}/newPass`, { data})
+export const AuthGoogle = async (data) => await axios.post(`${urlServer}/authgoogleAccount`, { data})
 
 
 // Data Admin Register

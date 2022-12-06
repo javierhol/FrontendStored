@@ -1,6 +1,8 @@
 
 import React, { createContext, useState, useContext } from "react";
-import { PostDataUser,postRecoveryEmail,recoverycode,newPassword,PostDataAdmin } from "../../apis/ApiData"
+import {
+  PostDataUser, postRecoveryEmail, recoverycode, newPassword, PostDataAdmin,
+AuthGoogle} from "../../apis/ApiData"
 export const contextUserAdmin = createContext()
 
 export const usePostAuth = () => {
@@ -36,6 +38,15 @@ export const UserContextData = ( { children } ) => {
     
    }
   }
+  const getPostLoginAuthGoogle = async ( postDataUser ) => {
+
+    try {
+      const response = await AuthGoogle( postDataUser );
+      return response
+    } catch ( error ) {
+      return error
+    }
+  }
   const getPostLogin= async ( postDataUser ) => {
     try {
       const response = await PostDataUser( postDataUser );
@@ -61,7 +72,8 @@ export const UserContextData = ( { children } ) => {
     getPostLogin,
     recoveryPasssword,
     verifyCodeUser,
-    newPasswordL
+    newPasswordL,
+    getPostLoginAuthGoogle
 
   }}  >
 

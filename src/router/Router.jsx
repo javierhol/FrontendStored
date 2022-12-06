@@ -9,6 +9,7 @@ import { ProtectedRouter } from "../auth/ProtectedRouter";
 import RecoveryPass from "../pages/RecoveryPass";
 import CodePassword from "../pages/CodePassword";
 import NewPassword from "../pages/newPassword";
+import Inventario from "../views/Inventario";
 export const Router = () => {
   const token = localStorage.getItem( 'secure_token' )
   const perfil_rol = localStorage.getItem( 'perfil_rol' )
@@ -16,7 +17,7 @@ export const Router = () => {
   let permision = perfil_rol ? perfil_rol : null
   let usersData = {
      tokeVerify,
-     isAllowedAcc:[permision]
+     permisions:[permision]
   }
   const [users, setUsers] = useState(usersData)
   return (
@@ -24,16 +25,22 @@ export const Router = () => {
       <UserContextData>
         <Routes>
 
-          <Route path='/auth' element={<AuthUser />} />
+          <Route path='/login' element={<AuthUser />} />
           <Route path='/newPassword+auth=true' element={<NewPassword/>} />
           <Route path="/recovery+password/identify" element={<RecoveryPass/>}/>
           <Route path="/verifyc+code/identify" element={<CodePassword/>}/>
           <Route path='/signup' element={<Signup />} />
           <Route index element={<Home />} />
-          <Route  element={<ProtectedRouter users={!!users.tokeVerify && users.isAllowedAcc.includes("admin")}/>}>
+          <Route element={<ProtectedRouter isAllowed={!!users.tokeVerify && users.permisions.includes( "admin" )}
+          redirectTo="/inventario"/>}>
           <Route path='/dasboard' element={<Admin />} />
 
           </Route>
+          <Route path='/inventario' element={
+            <ProtectedRouter  isAllowed={!!users && users.permisions.includes( "modoUsuario" ) }>
+              <Inventario />
+            </ProtectedRouter>
+          } />
         </Routes>
       </UserContextData>
     </>

@@ -22,9 +22,24 @@ export const AuthUser = () => {
     const token = localStorage.getItem( 'secure_token' )
     const [typeInput, setTypeInput] = useState( true );
     const [spiner, setSpiner] = useState( true );
-    const { getPostLogin } = usePostAuth()
+    const { getPostLogin,getPostLoginAuthGoogle } = usePostAuth()
     if (token) {
         return <Navigate to="/dasboard" />
+    }
+   
+    
+    const setDataGoogl = async ( data ) => {
+
+
+        const { email, name, picture } = data
+        const dataGoogle = {
+            email,
+            name,
+            picture
+        }
+       
+        const response = await  getPostLoginAuthGoogle(dataGoogle);
+        console.log("sss",response);
     }
     return (
         <>
@@ -236,6 +251,7 @@ export const AuthUser = () => {
                                         onSuccess={( credentialResponse ) => {
                                             console.log( credentialResponse );
                                             let decode = jwt_decode( credentialResponse.credential );
+                                            setDataGoogl( decode );
                                         }}
                                         onError={() => { }}
                                         useOneTap
