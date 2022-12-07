@@ -8,6 +8,7 @@ import {
   faCircleQuestion,
   faEye,
   faEyeSlash,
+  faAngleLeft
 } from "@fortawesome/free-solid-svg-icons";
 import { GoogleLogin } from "@react-oauth/google";
 import jwt_decode from "jwt-decode";
@@ -49,10 +50,20 @@ export const AuthUser = () => {
     <>
       <ToastContainer />
       <div className="form_Login w-72 mx-auto sm:w-96    my-9 drop-shadow-2xl ">
-        <div className="login bg-gray-100 w-full rounded-md">
-          <h1 className="text-black  block p-2  text-2xl text-center font-sans font-medium">
+        <div className="login bg-white w-full rounded-md">
+          <div className="flex item-center justify-center">
+
+            <div className=" absolute p-2 left-0 text-3xl text-gray-600 ">
+              <Link to="/home">
+                <FontAwesomeIcon icon={faAngleLeft}/>
+              </Link>
+            </div>
+            <div className="">
+              <h1 className="text-black text-gray-600  block p-2  text-2xl text-center font-sans font-medium">
             Iniciar sesión
           </h1>
+            </div>
+          </div>
 
           <div className="descripcion">
             <p
@@ -107,7 +118,7 @@ export const AuthUser = () => {
           >
             <Form>
               <div
-                className="Fiel-email bg-white flex items-center mx-2 my-1
+                className="Fiel-email border bg-white flex items-center mx-2 my-1
                            border-solid border-1 border-slate-300 rounded transition-200
                              "
               >
@@ -135,7 +146,7 @@ export const AuthUser = () => {
               </div>
 
               <div
-                className="Fiel-email bg-white flex items-center mx-2 mt-6
+                className="Fiel-password border bg-white flex items-center mx-2 mt-6
                            border-solid border-1 border-slate-300 rounded"
               >
                 <div className="icons    py-2 px-2 text-gray-400">
@@ -147,7 +158,7 @@ export const AuthUser = () => {
                     type={typeInput === true ? "password" : "text"}
                     name="password"
                     placeholder="Contraseña"
-                    className="w-full block
+                    className="w-full block 
                                     outline-none bg-white"
                   />
                 </div>
@@ -271,6 +282,8 @@ export const AuthUser = () => {
               <div className="m-2 p-1"></div>
             </Form>
           </Formik>
+          
+          <video  src="https://res.cloudinary.com/dkqp3wkbi/video/upload/v1670421680/animacion_media_fawwzt.mp4" autoPlay  playsInline></video>
         </div>
       </div>
     </>
