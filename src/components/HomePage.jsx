@@ -18,7 +18,7 @@ export const HomePage=() =>{
     <>
     <div className="bg-[#F5F5F5]">
     <Header/>
-    <div className=" flex bg-gradient-to-b from-[#1876F2]  to-[#F5F5F5] pb-50 justify-between">
+    {/* <div className=" flex bg-gradient-to-b from-[#1876F2]  to-[#F5F5F5] pb-50 justify-between">
     <div className="w-3/5 py-20 px-10">
       <p className="text-5xl text-white font-medium">¡Comienza a crear tu propio invetario para llevar un mejor manejo de tu negocio!</p>
       <button type="button" className="inline-block px-10 py-5 my-20 mx-2 bg-white text-black font-medium text-base leading-tight rounded-lg shadow-md hover:bg-blue-700 hover:shadow-lg hover:text-white focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out">Comenzar ya</button>
@@ -111,7 +111,7 @@ export const HomePage=() =>{
         </div>
       </div>
     </div>
-    <Footer/> 
+    <Footer/>  */}
     </div>
     </>
   )
