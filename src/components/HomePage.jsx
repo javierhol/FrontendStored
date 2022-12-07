@@ -1,17 +1,17 @@
-import { React } from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faChevronRight } from "@fortawesome/free-solid-svg-icons";
-import { Formik, Field, Form, ErrorMessage } from "formik";
-import imagen1 from "../assets/img/Frame2.svg";
-import imagen2 from "../assets/img/Frame15.svg";
-import imagen3 from "../assets/img/Frame8792.svg";
-import imagen4 from "../assets/img/card1.jpg";
-import imagen5 from "../assets/img/card2.jpg";
-import imagen6 from "../assets/img/card03.jpg";
-import imagen7 from "../assets/img/estadisticaStored.svg"
-import imagen8 from "../assets/img/Frame8791.svg"
+// import { React } from "react";
+// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+// import { faChevronRight } from "@fortawesome/free-solid-svg-icons";
+// import { Formik, Field, Form, ErrorMessage } from "formik";
+// import imagen1 from "../assets/img/Frame2.svg";
+// import imagen2 from "../assets/img/Frame15.svg";
+// import imagen3 from "../assets/img/Frame8792.svg";
+// import imagen4 from "../assets/img/card1.jpg";
+// import imagen5 from "../assets/img/card2.jpg";
+// import imagen6 from "../assets/img/card03.jpg";
+// import imagen7 from "../assets/img/estadisticaStored.svg"
+// import imagen8 from "../assets/img/Frame8791.svg"
 import Header from "./Header";
-import { Footer } from "./Footer";
+// import { Footer } from "./Footer";
 
 export const HomePage=() =>{
   return (
