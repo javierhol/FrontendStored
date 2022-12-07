@@ -10,15 +10,13 @@ export const Signup = () => {
 
     return(
 
-        <>
-
-        
+        <>        
         <div className="form-signup w-4/5 sm:w-96 mx-auto sm:mx-auto mt-5 ">
             <div className="container-signup  border shadow-2xl pb-1 rounded-lg ">
-                <h1 class="text-xl font-semibold mt-2 mb-5 pt-5 text-center ">Registrarme</h1>
+                <h1 className="text-xl font-semibold mt-2 mb-5 pt-5 text-center ">Registrarme</h1>
                 <div className="description">
-                    <p class="mx-10 text-center sm:mx-auto">Crea una cuenta para mejorar la experiencia y </p>
-                    <p class="text-center mb-5">calidad de tu negocio</p>
+                    <p className="mx-10 text-center sm:mx-auto">Crea una cuenta para mejorar la experiencia y </p>
+                    <p className="text-center mb-5">calidad de tu negocio</p>
                 </div>
                 <div className="container-google bg-[#E9EDF2] py-2 boder border-solid rounded flex justify-center mx-5 sm:mx-5">
                     <div className="bg-white ml-2 p-5 h-10 sm:w-10 sm:h-10 rounded-full"></div>
