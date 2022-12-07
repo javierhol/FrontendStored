@@ -65,13 +65,22 @@ export const UserRegister = () => {
                 .min(6, "Debe tener mas de 6 caracteres"),
             })}
             onSubmit={async (values) => {
-                alert(JSON.stringify(values))
+               
               let response = await getUserRegister(values);
-              console.log(values);
-              console.log(response);
+                if (response.status === 200) {
+                  toast.success("Usuario creado con exito", {
+                    position: "top-right",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                  });
+                }
+
             }
         }
-             
           >
             <Form>
               <div
@@ -188,34 +197,14 @@ export const UserRegister = () => {
              
            </Field>
 
-              <div className="permisos  mx-2 mt-2 my-5">
-                <Field type="checkbox" name="toggle" className="text-xl" />
-                <Link
-                  to="/privacy"
-                  className="mx-2  text-slate-900 hover:underline overflow-hidden
-                                "
-                >
-                  Acepto términos y condiciones
-                </Link>
-              </div>
-              <p className="text-sm font-semibold  mx-5 sm:ml-5 text-center my-5">
-                ¿Ya tienes una cuenta?
-                <Link to="/auth">
-                  <span
-                    href="#!"
-                    className="text-[#2771E0] hover:text-blue-700 transition duration-200 ease-in-out ml-1 sm:ml-1"
-                  >
-                    Iniciar sesión
-                  </span>
-                </Link>
-              </p>
+
               <div className="text-center mt-5">
                 <button
                   type="submit"
                   className="bg-[#009AFA] inline-block px-6 py-2.5 w-40 rounded-full text-white  text-sm  rounded shadow-md hover:bg-[#009AFA] hover:shadow-lg focus:shadow-lg
                         focus:outline-none focus:ring-0 active:shadow-lg transition duration-150 ease-in-out w-full mb-3"
                 >
-                  Crear cuenta
+                  Crear usuario
                 </button>
               </div>
             </Form>
