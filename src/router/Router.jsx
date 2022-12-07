@@ -10,6 +10,7 @@ import RecoveryPass from "../pages/RecoveryPass";
 import CodePassword from "../pages/CodePassword";
 import NewPassword from "../pages/newPassword";
 import Inventario from "../views/Inventario";
+import {UserRegister} from '../components/UserRegister';
 export const Router = () => {
   const token = localStorage.getItem( 'secure_token' )
   const perfil_rol = localStorage.getItem( 'perfil_rol' )
@@ -37,7 +38,7 @@ export const Router = () => {
 
           </Route>
           <Route path='/inventario' element={
-            <ProtectedRouter  isAllowed={!!users && users.permisions.includes( "modoUsuario" ) }>
+            <ProtectedRouter  isAllowed={!!users && users.permisions.includes( "usuario" ) }>
               <Inventario />
             </ProtectedRouter>
           } />

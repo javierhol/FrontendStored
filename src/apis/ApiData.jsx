@@ -16,3 +16,11 @@ export const tokenData = async (tokenData,token) => await axios.post(`${urlServe
     }
 })
 
+// Data User Register
+let accessToken=localStorage.getItem("secure_token")
+export const PostDataUserRegister = async (postDataUserRegister) => await axios.post(`${urlServer}/registerUser`, { postDataUserRegister},{
+    headers: {
+        "acc-token-data":accessToken
+    }
+    })
+

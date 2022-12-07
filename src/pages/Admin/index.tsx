@@ -1,9 +1,10 @@
 import React from 'react';
+import {UserRegister} from '../../components/UserRegister'
 
 function Admin() {
   return (
     <div>
-      Admin
+      <UserRegister />
     </div>
   );
 }

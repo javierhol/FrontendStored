@@ -15,7 +15,7 @@ export const Signup = () => {
     const [typeInput, setTypeInput] = useState(true)
     const [spiner, setSpiner] = useState(true)
     const { getPostRegister } = usePostAuth()
-    console.log(getPostRegister);
+   
     
 
     return(
