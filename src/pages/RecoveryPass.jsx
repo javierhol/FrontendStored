@@ -23,10 +23,13 @@ function RecoveryPass() {
         <div className="flex items-center  ">
           <Link
             to={"/login"}
-            className="items-center flex bg-[#0099FF] m-1 rounded text-white py-2 px-3"
+            className="items-center flex bg-gray-200 m-1 rounded text-white py-2 px-3"
           >
-            <FontAwesomeIcon icon={faAngleLeft} className="text-2xl" />
-            <span className="pl-2">Volver</span>
+            <FontAwesomeIcon
+              icon={faAngleLeft}
+              className="text-2xl text-gray-700"
+            />
+            <span className="pl-2 text-gray-700">Volver</span>
           </Link>
           <span className="text-2xl text-[#0099FF] mx-2 font-bold">Stored</span>
         </div>
@@ -51,7 +54,8 @@ function RecoveryPass() {
           Recuperar contraseña
         </div>
         <div className="text-gray-600 my-3 mx-2">
-          Ingrese su correo electronico para la solicitud de tu cuenta
+          Ingrese su correo electronico para la solicitud de tu cuenta y
+          recuperacion de contraseña
         </div>
         <Formik
           initialValues={{
@@ -117,7 +121,7 @@ function RecoveryPass() {
                                 p-1 py-3 w-5/6 mx-auto my-3 hover:opacity-[0.85] transition
                                  flex justify-center cursor-pointer"
                 >
-                  Enviar para la recuperacion de contraseña
+                  Continuar con recuperación de contraseña
                 </button>
               </div>
               <div className={loading ? "loadingblovk" : "loading"}>

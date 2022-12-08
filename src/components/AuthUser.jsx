@@ -11,6 +11,7 @@ import {
   faAngleLeft,
   faAngleRight,
 } from "@fortawesome/free-solid-svg-icons";
+import "../assets/css/fuente.css";
 import { GoogleLogin } from "@react-oauth/google";
 import jwt_decode from "jwt-decode";
 import { ToastContainer, toast } from "react-toastify";
@@ -20,6 +21,7 @@ import { Link } from "react-router-dom";
 import { usePostAuth } from "../hooks/context/UserContextData";
 import "../assets/css/spiner.css";
 import { Navigate } from "react-router-dom";
+import { Header } from "../components/Header";
 export const AuthUser = () => {
   const token = localStorage.getItem("secure_token");
   const [typeInput, setTypeInput] = useState(true);
@@ -50,11 +52,12 @@ export const AuthUser = () => {
   return (
     <>
       <ToastContainer />
-      <div className="form_Login  mx-auto rounded-md border form w-[50rem]  my-9 drop-shadow-2xl ">
-        <div className="login bg-white relative rounded-md animate__animated animate__fadeInDown">
+      <Header />
+      <div className="form_Login  mx-auto rounded-md border animate__animated animate__fadeInDown bg-white form w-[50rem]  my-9 drop-shadow-2xl ">
+        <div className="login bg-white z-20 relative rounded-md ">
           <div className="flex item-center justify-center">
             <div className=" absolute p-2 left-0 text-3xl text-gray-600 ">
-              <Link to="/home">
+              <Link to="/">
                 <FontAwesomeIcon icon={faAngleLeft} />
               </Link>
             </div>

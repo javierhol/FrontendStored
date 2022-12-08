@@ -1,0 +1,51 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+.todoFont{
+    font-family: 'Roboto', sans-serif;
+}
+
+
+.lik::after{
+    content: "";
+    height: 2px;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    transform: scale(0);
+    background: #1876F2;
+    -webkit-transform: scale(0);
+    -moz-transform: scale(0);
+    -ms-transform: scale(0);
+    -o-transform: scale(0);
+}
+.lik:hover::after{
+    width: 100%;
+    transform: scale(1);
+    transition: 0.2s;
+    -webkit-transform: scale(1);
+    -moz-transform: scale(1);
+    -ms-transform: scale(1);
+    -o-transform: scale(1);
+    -webkit-transition: 0.2s;
+    -moz-transition: 0.2s;
+    -ms-transition: 0.2s;
+    -o-transition: 0.2s;
+}
+.link{
+    background: blue;
+}
+.active::after{
+    content: "";
+    height: 2px;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    transform: sc1ale(1);
+    background: #1876F2;
+    -webkit-transform: sc1ale(1);
+    -moz-transform: sc1ale(1);
+    -ms-transform: sc1ale(1);
+    -o-transform: sc1ale(1);
+}
