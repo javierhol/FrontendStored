@@ -15,13 +15,13 @@ function NewPassword() {
       <ToastContainer />
       <div className="flex  bg-white w-full border-b justify-between items-center">
         <div className="flex items-center  ">
-          <Link
-            to={"/login"}
-            className="items-center flex bg-[#0099FF] m-1 rounded text-white py-2 px-3"
-          >
-            <FontAwesomeIcon icon={faAngleLeft} className="text-2xl" />
-            <span className="pl-2">Volver</span>
-          </Link>
+        <Link
+              to={"/verifyc+code/identify"}
+              className="items-center flex bg-gray-200 m-1 rounded text-white py-2 px-3"
+            >
+              <FontAwesomeIcon icon={faAngleLeft} className="text-2xl text-gray-700" />
+              <span className="pl-2 text-gray-700">Volver</span>
+            </Link>
           <span className="text-2xl text-[#0099FF] mx-2 font-bold">Stored</span>
         </div>
         <div className="flex items-center">
@@ -45,7 +45,7 @@ function NewPassword() {
           Ingrese la nueva contraseña
         </div>
         <div className="text-gray-600 my-3 mx-2">
-          Ya casi terminamos ingresa tu nueva contraseña para poder acceder a tu
+          Ya casi terminamos ingresa tu nueva contraseña para quue puedas  acceder a tu
           cuenta
         </div>
         <Formik
@@ -80,7 +80,7 @@ function NewPassword() {
               localStorage.removeItem("email");
               setLoading(!loading);
               setTimeout(() => {
-                window.location.href = "/auth";
+                window.location.href = "/login";
               }, 4000);
             } else {
               toast.error("Error al cambiar la contraseña");

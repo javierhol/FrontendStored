@@ -52,10 +52,10 @@ export const AuthUser = () => {
   return (
     <>
       <ToastContainer />
-      <Header />
-      <div className="form_Login  mx-auto rounded-md border animate__animated animate__fadeInDown bg-white form w-[50rem]  my-9 drop-shadow-2xl ">
+     <Header/>
+      <div className="form_Login  mx-auto rounded-md border animate__animated animate__fadeIn bg-white form w-[50rem]  my-9 drop-shadow-2xl ">
         <div className="login bg-white z-20 relative rounded-md ">
-          <div className="flex item-center justify-center">
+          <div className="flex item-center justify-center flex-col">
             <div className=" absolute p-2 left-0 text-3xl text-gray-600 ">
               <Link to="/">
                 <FontAwesomeIcon icon={faAngleLeft} />
@@ -77,7 +77,7 @@ export const AuthUser = () => {
               Ingrese sus datos para comenzar
             </p>
           </div>
-          <div className="grid grid-cols-2 ">
+          <div className="grid grid-cols-1 md:grid-cols-2">
             <div className="">
               <Formik
                 initialValues={{
@@ -272,7 +272,7 @@ export const AuthUser = () => {
               </Formik>
             </div>
 
-            <div className="entry mx-1 rounded-md">
+            <div className="entry mx-1 rounded-md hidden md:block">
               <video
                 src="https://res.cloudinary.com/dkqp3wkbi/video/upload/v1670421680/animacion_media_fawwzt.mp4"
                 autoPlay
@@ -297,6 +297,7 @@ export const AuthUser = () => {
                   className="authGoogle 
                                 p-2 m-2 flex items-center justify-center rounded"
                 >
+
                   <GoogleLogin
                     onSuccess={(credentialResponse) => {
                       console.log(credentialResponse);
