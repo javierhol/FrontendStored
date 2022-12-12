@@ -66,13 +66,14 @@ function NewPassword() {
               ),
           })}
           onSubmit={async (values) => {
+            /*
             let cod = localStorage.getItem("codigo");
             let email = localStorage.getItem("email");
             const response = await newPasswordL({
               codigo: parseInt(cod),
               correo: email,
               newPassword: values.password2,
-            });
+            });           
             console.log(response);
             if (response.status === 204) {
               toast.success("Contraseña cambiada correctamente");
@@ -85,7 +86,8 @@ function NewPassword() {
             } else {
               toast.error("Error al cambiar la contraseña");
               setLoading(!loading);
-            }
+            }*/
+            alert("Helooo")
           }}
         >
           <Form>
@@ -127,7 +129,7 @@ function NewPassword() {
                 <Field
                   type="password"
                   name="password2"
-                  placeholder="Ingrese la nueva contraseña"
+                  placeholder="Confirmar contraseña"
                   className="w-full block
                                          outline-none "
                 />
@@ -150,7 +152,7 @@ function NewPassword() {
                                 p-1 py-3 w-5/6 mx-auto my-3 hover:opacity-[0.85] transition
                                  flex justify-center cursor-pointer"
                 >
-                  confirmar
+                  Confirmar
                 </button>
               </div>
               <div className={loading ? "loadingblovk" : "loading"}>

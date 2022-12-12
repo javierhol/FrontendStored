@@ -127,8 +127,8 @@ useEffect(() => {
           </div>
           <div className="text-gray-600 my-3 mx-2">
             Hemos enviado un código de verificación a{" "}
-            <strong>{getEmal} ospinaortizjuandaniel351@gmail.com, </strong>
-            para continuar deberas completar este campo  para continuar
+            <strong>{getEmal}, </strong>
+            para continuar deberas completar este campo.
           </div>
           <form action="flex justify-center" onSubmit={handleForm}>
             <div className="formClick flex justify-center">
