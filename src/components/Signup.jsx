@@ -195,12 +195,7 @@ export const Signup = () => {
                     Ayuda
                   </p>
                 </Link>
-                <Link
-                  to="/recoveryPassword"
-                  className="text-[#0099FF] hover:underline"
-                >
-                  ¿Olvidaste tu contraseña?
-                </Link>
+                
               </div>
               <div className="permisos  mx-2 mt-2 my-5">
                 <Field type="checkbox" name="toggle" className="text-xl" />
@@ -214,7 +209,7 @@ export const Signup = () => {
               </div>
               <p className="text-sm font-semibold  mx-5 sm:ml-5 text-center my-5">
                 ¿Ya tienes una cuenta?
-                <Link to="/auth">
+                <Link to="/login">
                   <span
                     href="#!"
                     className="text-[#2771E0] hover:text-blue-700 transition duration-200 ease-in-out ml-1 sm:ml-1"

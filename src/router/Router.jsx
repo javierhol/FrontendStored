@@ -10,6 +10,7 @@ import RecoveryPass from "../pages/RecoveryPass";
 import CodePassword from "../pages/CodePassword";
 import NewPassword from "../pages/newPassword";
 import Inventario from "../views/Inventario";
+import {NotFount} from "../pages/NotFount";
 export const Router = () => {
   const token = localStorage.getItem( 'secure_token' )
   const perfil_rol = localStorage.getItem( 'perfil_rol' )
@@ -24,6 +25,7 @@ export const Router = () => {
     <>
       <UserContextData>
         <Routes>
+        <Route path='*' element={<NotFount />} />
 
           <Route path='/login' element={<AuthUser />} />
           <Route path='/newPassword+auth=true' element={<NewPassword/>} />

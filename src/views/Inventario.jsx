@@ -11,8 +11,11 @@ function Inventario() {
   }
   return (
     <div>
-     <h1>Inventario</h1>
-     <button onClick={hundleClick}>
+     <h1 className='text-center items-center bg-slate-700
+     text-white p-4 text-3xl'>Inventario</h1>
+     <button onClick={hundleClick}
+     className="bg-red-500 m-5 p-2 rounded text-xl text-white
+     hover:bg-red-600">
       Cerrar sesión
      </button>
 
