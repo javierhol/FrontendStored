@@ -55,7 +55,7 @@ export const Footer=() =>{
         </div>
       </div>
       <p className="text-[#545454] m-5">Vistas: 22,44</p>
-      <div className="flex justify-between text-gray-700 text-center p-4 border-t-4 border-[#DADADB] sm:flex-col lg:flex ">
+      <div className="flex justify-between text-gray-700 text-center p-4 border-t-4 border-[#DADADB] lg:flex ">
         <p>
           © Todos los derechhos reservados 2022 | Stored
         </p>
