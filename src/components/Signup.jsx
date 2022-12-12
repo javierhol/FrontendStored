@@ -9,7 +9,7 @@ import {
   faLock,
   faCircleQuestion,
   faEye,
-  faEyeSlash,
+  faEyeSlash,faAngleLeft
 } from "@fortawesome/free-solid-svg-icons";
 import { usePostAuth } from "../hooks/context/UserContextData";
 import { ToastContainer, toast } from "react-toastify";
@@ -26,16 +26,36 @@ export const Signup = () => {
     <>
       <ToastContainer />
       <Header />
-      <div className="form-signup w-4/5 sm:w-96 mx-auto sm:mx-auto mt-5 bg-gray-100">
-        <div className="container-signup  border shadow-2xl pb-1 rounded-lg ">
-          <h1 className="text-xl font-semibold mt-2 mb-5 pt-5 text-center ">
-            Registrarme
-          </h1>
+      <div className="form-signup  mx-auto rounded-md border animate__animated animate__fadeIn bg-white form w-[50rem]  my-9 drop-shadow-2xl">
+      <div className="flex item-center justify-center">
+            <div className=" absolute p-2 left-0 text-3xl text-gray-600 ">
+              <Link to="/">
+                <FontAwesomeIcon icon={faAngleLeft} />
+              </Link>
+            </div>
+            <div className="">
+              <h1 className=" text-gray-600 mb-6 block p-2  text-2xl text-center font-sans font-medium ">
+                Crear Cuenta
+              </h1>
+            </div>
+          </div>
+      <div className="grid grid-cols-2">
+      <div className="entry mx-4 h-full rounded-md item-center ">
+              <video
+                src="https://res.cloudinary.com/dkqp3wkbi/video/upload/v1670421680/animacion_media_fawwzt.mp4"
+                autoPlay
+                playinline
+                loop
+                muted
+                preload="auto"
+              ></video>
+            </div>
+        <div className="container-signup   pb-1 rounded-lg ">   
           <div className="description">
-            <p className="mx-10 text-center sm:mx-auto">
-              Crea una cuenta para mejorar la experiencia y{" "}
+            <p className="block my-5 mx-5">
+              Crea una cuenta para mejorar la experiencia y calidad de tu negocio{" "}
             </p>
-            <p className="text-center mb-5">calidad de tu negocio</p>
+
           </div>
           <div className="countCuenda cursor-pointer">
             <div
@@ -61,7 +81,7 @@ export const Signup = () => {
           </div>
           <div className="flex items-center mx-5 my-5 before:flex-1 before:border-t before:border-gray-300 before:mt-0.5 after:flex-1 after:border-t after:border-gray-300 after:mt-0.5 sm:mx-5">
             <p className="text-center mx-4 mb-0">O</p>
-          </div>
+          </div>    
           <Formik
             initialValues={{ email: "", password: "" }}
             validationSchema={Yup.object({
@@ -105,7 +125,7 @@ export const Signup = () => {
                 });
               }
             }}
-          >
+          >           
             <Form>
               <div
                 className="Fiel-email bg-white  flex items-center mx-2 my-1
@@ -133,7 +153,6 @@ export const Signup = () => {
                   name="email"
                 />
               </div>
-
               <div
                 className="Fiel-email bg-white flex items-center mx-2 mt-6
                            border-solid border-1 border-slate-300 rounded"
@@ -174,7 +193,6 @@ export const Signup = () => {
                   )}
                 </div>
               </div>
-
               <div className="error">
                 <ErrorMessage
                   component="p"
@@ -183,7 +201,6 @@ export const Signup = () => {
                   name="password"
                 />
               </div>
-
               <div className="flex justify-between m-3">
                 <Link to="ayuda">
                   <p>
@@ -194,12 +211,6 @@ export const Signup = () => {
                     />{" "}
                     Ayuda
                   </p>
-                </Link>
-                <Link
-                  to="/recoveryPassword"
-                  className="text-[#0099FF] hover:underline"
-                >
-                  ¿Olvidaste tu contraseña?
                 </Link>
               </div>
               <div className="permisos  mx-2 mt-2 my-5">
@@ -214,12 +225,12 @@ export const Signup = () => {
               </div>
               <p className="text-sm font-semibold  mx-5 sm:ml-5 text-center my-5">
                 ¿Ya tienes una cuenta?
-                <Link to="/auth">
+                <Link to="/login">
                   <span
                     href="#!"
                     className="text-[#2771E0] hover:text-blue-700 transition duration-200 ease-in-out ml-1 sm:ml-1"
                   >
-                    Iniciar sesión
+                    Inicar Sesión
                   </span>
                 </Link>
               </p>
@@ -233,7 +244,8 @@ export const Signup = () => {
                 </button>
               </div>
             </Form>
-          </Formik>
+          </Formik>        
+            </div>
         </div>
       </div>
     </>
